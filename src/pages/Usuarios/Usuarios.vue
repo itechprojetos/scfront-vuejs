@@ -61,7 +61,7 @@
               <the-mask
                 :masked="true"
                 v-model="usuario.telefone"
-                :mask="['(##) ####-####','(##) #####-####']"
+                :mask="['+### ### ### ###']"
                 class="form-control"
               />
             </div>
@@ -261,6 +261,8 @@ export default {
         this.pesquisando=false
         this.usuarios = r
         console.log(this.usuarios)
+      }).catch(err =>{
+        pesquisando = false
       })
 
     },
