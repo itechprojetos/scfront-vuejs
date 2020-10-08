@@ -62,47 +62,42 @@
       },
       toClockIn() {
         let ponto = {
-          ponto: '',
-          type: '',
-          user: ''
+          user: this.$store.state.auth.user.id
         }
-        const date = new Date();
-        const minIn = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 23, 45, 0)
-        const maxIn = new Date(date.getFullYear(), date.getMonth(), date.getDate() + 1, 0, 30, 0)
-        const minOut = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 8, 0, 0)
-        const maxOut = new Date(date.getFullYear(), date.getMonth(), date.getDate(), 10, 0, 0)
-        if (date > minIn && date < maxIn) {
-          ponto.ponto = date
-          ponto.type = 'Entrada'
-          ponto.user = this.$store.state.auth.user.id
-          this.$store.dispatch('home/ActionToClockIn', ponto).then(r => {
+        this.$store.dispatch('home/ActionToClockIn', ponto).then(r => {
+          console.log(r)
+          if (r === 'Ponto registrado com sucesso') {
             this.$swal
               .fire({
                 icon: "success",
                 title: `Sucesso`,
                 text: "Ponto de entrada registrado com sucesso",
               });
-          })
-        } else if (date > minOut && date < maxOut) {
-          ponto.ponto = date
-          ponto.type = 'Saída'
-          ponto.user = this.$store.state.auth.user.id
-          this.$store.dispatch('home/ActionToClockIn', ponto).then(r => {
+          } else if (r === 'Ponto de Entrada já cadastrado') {
             this.$swal
               .fire({
-                icon: "success",
-                title: `Sucesso`,
-                text: "Ponto de saida registrado com sucesso",
+                icon: "error",
+                title: `Error`,
+                text: "Ponto de entrada ja registrado!",
               });
-          })
-        } else {
-          this.$swal
+          } else if (r === 'Ponto de Saída já cadastrado') {
+            this.$swal
               .fire({
                 icon: "error",
-                title: `Erro`,
-                text: "Fora do horário de registro de ponto!",
+                title: `Error`,
+                text: "Ponto de saida ja registrado!",
               });
-        }
+          } else if (r === 'Fora do horário de registro de ponto.') {
+            this.$swal
+              .fire({
+                icon: "error",
+                title: `Error`,
+                text: "Fora do horário de ponto!",
+              });
+          }
+        }).catch(err => {
+          console.log(err)
+        })
       }
     },
   };

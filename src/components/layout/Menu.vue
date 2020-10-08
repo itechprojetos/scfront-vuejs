@@ -21,6 +21,9 @@
     <li class="sidebar-nav-item">
       <router-link to="/perfil" class="sidebar-nav-link">Perfil de Acesso</router-link>
     </li>    
+    <li class="sidebar-nav-item">
+      <a class="sidebar-nav-link" style="font-weight: bold;" href="" @click='sair'>Sair</a>
+    </li>  
     </ul>
   </div>
 </template>
@@ -33,6 +36,10 @@
       },
     },
     methods: {
+      sair() {
+        this.$store.dispatch("auth/ActionSingnout").then();
+        this.$router.push("/login");
+      } 
     },
   };
 </script>

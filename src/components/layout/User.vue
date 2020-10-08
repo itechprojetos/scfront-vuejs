@@ -118,10 +118,6 @@ export default {
       console.log(this.$store.state.auth)
       return this.$store.state.auth.user;
     },
-    sair() {
-      this.$store.dispatch("auth/ActionSingnout").then();
-      this.$router.push("/login");
-    },
     nome() {
       if (this.user) {
         return this.user.username;
@@ -130,5 +126,11 @@ export default {
       }
     },
   },
+  methods:{
+    sair() {
+      this.$store.dispatch("auth/ActionSingnout").then();
+      this.$router.push("/login");
+    }    
+  }
 };
 </script>

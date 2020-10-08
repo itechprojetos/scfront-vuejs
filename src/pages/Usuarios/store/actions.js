@@ -7,7 +7,7 @@ export const ActionGetList = function () {
 };
 
 export const ActionUpdate = function (context, payload) {
-    return http.put(`users`, payload).then((r) => {
+    return services.usuario.update({id: payload.id}, payload).then((r) => {
         return r.data;
     });
 };

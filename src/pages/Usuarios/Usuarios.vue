@@ -43,12 +43,12 @@
         <div class="row">
           <div class="col-lg-6">
             <div class="form-group">
-              <label class="form-control-label">CPF</label>
+              <label class="form-control-label">Contribuinte</label>
               <span class="tx-danger">*</span>
               <the-mask
                 :masked="true"
                 v-model="usuario.cpf"
-                :mask="['###.###.###-##']"
+                :mask="['###.###.###']"
                 class="form-control"
               />
             </div>
@@ -163,12 +163,12 @@ export default {
     perfis: [],
     colunas: [
       {
-        label: "CPF",
+        label: "Contribuinte",
         field: "cpf",
       },
       {
         label: "NOME",
-        field: "name",
+        field: "username",
       },
       {
         label: "EMAIL",
@@ -255,9 +255,17 @@ export default {
       }
     },
     load() {
+      this.pesquisando = true;
+
+      this.$store.dispatch('usuario/ActionGetList').then(r =>{
+        this.pesquisando=false
+        this.usuarios = r
+        console.log(this.usuarios)
+      })
 
     },
     Editar(item) {
+      this.usuario = item
     },
     Deletar(item) {
     },
