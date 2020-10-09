@@ -7,9 +7,8 @@ Vue.use(VueResource);
 
 const http = Vue.http;
 http.options.root = "http://apisc-itechagencia-tech.umbler.net";
-//http.options.root = "http://127.0.0.1:8080";
+//http.options.root = "http://127.0.0.1:8080/api";
 http.interceptors.push(interceptors);
-http.headers.common['Access-Control-Allow-Origin'] = '*';
 
 Object.keys(services).map(function (s) {
     services[s] = Vue.resource('', {}, services[s]);

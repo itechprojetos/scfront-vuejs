@@ -1,6 +1,6 @@
 export default {
-    create: { method: 'POST', url: 'api/users' },
-    all: { method: 'GET', url: 'api/users' },
-    delete: {method: 'DELETE', url: '/api/user/{id}'},
-    update: {method: 'PUT', url: '/api/user/{id}'}
+    create: { method: 'POST', url: 'users' },
+    all: { method: 'GET', url: 'users' },
+    delete: {method: 'DELETE', url: 'user/{id}'},
+    update: {method: 'PUT', url: 'user/{id}'}
 };
