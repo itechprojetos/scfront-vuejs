@@ -6,7 +6,7 @@ import interceptors from "./interceptors";
 Vue.use(VueResource);
 
 const http = Vue.http;
-http.options.root = "http://apisc-itechagencia-tech.umbler.net";
+http.options.root = "http://apisc-itechagencia-tech.umbler.net/api";
 //http.options.root = "http://127.0.0.1:8080/api";
 http.interceptors.push(interceptors);
 

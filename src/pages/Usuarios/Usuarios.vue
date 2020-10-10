@@ -261,7 +261,7 @@
           this.usuarios = r
           console.log(this.usuarios)
         }).catch(err => {
-          pesquisando = false
+          this.pesquisando = false
         })
 
       },
