@@ -1,3 +1,3 @@
 export default {
-  register: { method: 'POST', url: 'api/toclockin' },
+  register: { method: 'POST', url: 'toclockin' },
 };
