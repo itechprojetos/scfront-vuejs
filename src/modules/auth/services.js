@@ -1,3 +1,3 @@
 export default {
-    login: { method: 'POST', url: 'api/auth/signin' }
+    login: { method: 'POST', url: 'auth/signin' }
 };
