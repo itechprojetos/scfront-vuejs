@@ -148,7 +148,6 @@
     mounted() {
       let usuario = this.$store.state.auth.user;
       this.perfis = this.$store.state.auth.roles;
-      console.log(this.$store.state)
       this.load();
     },
 
@@ -167,7 +166,6 @@
       podeApagar() {
       },
       verificarRequired() {
-        console.log(this.usuario)
         if (
           this.usuario.username === '' ||
           this.usuario.email === '' ||
@@ -198,7 +196,6 @@
         return false
       },
       manter() {        
-        console.log(this.usuario)
         if (this.opcao === 'A') {
           if (this.verificarRequired()) {
             return
@@ -259,7 +256,6 @@
         this.$store.dispatch('usuario/ActionGetList').then(r => {
           this.pesquisando = false
           this.usuarios = r
-          console.log(this.usuarios)
         }).catch(err => {
           this.pesquisando = false
         })

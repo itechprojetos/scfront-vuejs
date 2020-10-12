@@ -173,11 +173,9 @@ export default {
     SelectPopulado,
   },
   mounted() {
-    console.log(this.objeto);
   },
   methods: {
     AlterarTipo(item) {
-      console.log(item);
       this.objeto.tipo = item;
     },
   },

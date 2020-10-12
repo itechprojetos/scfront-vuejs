@@ -86,12 +86,7 @@ export default {
     } else if (this.list) {
       this.dados = JSON.parse(JSON.stringify(this.list));
       this.popularField();
-      // console.log(this.dados);
-      // this.select2();
     }
-    // window.$(".dados").on("change", (evt) => {
-    //   this.changeValue(evt);
-    // });
   },
   watch: {
     action(nValue) {

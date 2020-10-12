@@ -97,7 +97,6 @@ export default {
   mounted() {
     if (this.dados){
       this.dadosFiltro = this.dados;
-      console.log(typeof this.dadosFiltro)
       if (this.dadosFiltro !== undefined && typeof this.dadosFiltro !== 'object'){
         if (this.dadosFiltro[0].hasOwnProperty('type')){
           this.dadosFiltro[0].type = this.dadosFiltro[0].type.toUpperCase()

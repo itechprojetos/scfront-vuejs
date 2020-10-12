@@ -598,7 +598,6 @@ export default {
     var avatar5 = new window.KTImageInput("kt_image_5");
 
     avatar5.on("cancel", (imageInput) => {
-      console.log(imageInput);
       this.data.foto = null;
       // swal.fire({
       //     title: 'Image successfully changed !',
@@ -610,7 +609,6 @@ export default {
     });
 
     avatar5.on("change", (imageInput) => {
-      console.log(imageInput);
       // this.onFileChange(imageInput);
       // swal.fire({
       //     title: 'Image successfully changed !',
@@ -622,7 +620,6 @@ export default {
     });
 
     avatar5.on("remove", function (imageInput) {
-      console.log(imageInput);
       this.data.foto = null;
       this.data.url_foto = null;
       // swal.fire({
@@ -656,11 +653,9 @@ export default {
     },
     AlterarTipo(item) {
       this.data.pessoa.tipo_pessoa = item;
-      console.log(this.data.pessoa.tipo_pessoa);
     },
     AlterarSexo(item) {
       this.data.pessoa.sexo = item;
-      console.log(this.data.pessoa.sexo);
     },
   },
   computed: {

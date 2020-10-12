@@ -65,7 +65,6 @@
           user: this.$store.state.auth.user.id
         }
         this.$store.dispatch('home/ActionToClockIn', ponto).then(r => {
-          console.log(r)
           if (r === 'Ponto registrado com sucesso') {
             this.$swal
               .fire({

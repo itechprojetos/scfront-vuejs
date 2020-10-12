@@ -103,7 +103,6 @@ export default {
       });
     },
     deleta(item) {
-      console.log(item);
       this.dados = this.dados.filter((x) => x.index !== item.index);
       this.$emit("onAtualizar", this.dados);
     },

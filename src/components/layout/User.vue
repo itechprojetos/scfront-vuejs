@@ -115,7 +115,6 @@ export default {
   name: "user",
   computed: {
     user() {
-      console.log(this.$store.state.auth)
       return this.$store.state.auth.user;
     },
     nome() {

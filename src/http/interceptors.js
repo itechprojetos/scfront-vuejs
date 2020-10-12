@@ -12,7 +12,6 @@ export default function (request, next) {
 
         } else if (response.status != 200 && response.status != 201 && response.status != 204) {
             if (response.data) {
-                console.log(response.data.errors);
                 let message = 'Erro ao comunicar com API, favor contactar o suporte.'
                 if(response.data.errors){
                     message = ''

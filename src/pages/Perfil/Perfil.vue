@@ -271,8 +271,6 @@ export default {
         });
       });
 
-      console.log(this.perfil.permissions)
-
       if (this.opcao == "A") {
         this.$store.dispatch("perfil/ActionCreate", this.perfil).then((r) => {
           this.$swal
@@ -320,7 +318,6 @@ export default {
           dados.push({ key: el, dados: r[el] });
         });
         this.permissoes = _.chunk(dados, 4);
-        console.log(this.permissoes)
         this.pesquisando = false
       });
     },

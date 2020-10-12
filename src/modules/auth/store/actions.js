@@ -11,7 +11,6 @@ export const ActionSetHeaderToken = function ({ dispatch }, payload) {
 
 export const ActionDoLogin = function ({ dispatch }, payload) {
     return services.auth.login(payload).then(r => {
-        console.log(r)
         dispatch("ActionSetUser", r.data.user);
         dispatch("ActionSetToken", r.data.user.accessToken);
         dispatch("ActionSetRoles", r.data.roles);
