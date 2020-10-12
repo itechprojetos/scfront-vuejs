@@ -7,7 +7,8 @@
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --port 3000",
-    "start": "cross-env NODE_ENV=development webpack-dev-server --open --hot --port 3000",
+    "start": "node server",
+    "postinstall": "yarn run build",
     "build": "cross-env NODE_ENV=production webpack --progress --hide-modules"
   },
   "dependencies": {
@@ -15,9 +16,11 @@
     "@fortawesome/free-solid-svg-icons": "^5.10.1",
     "@fortawesome/vue-fontawesome": "^0.1.6",
     "axios": "^0.19.2",
+    "express": "^4.17.1",
     "js-file-download": "^0.4.11",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
+    "path": "^0.12.7",
     "printd": "^1.4.2",
     "pure-css-loader": "^3.3.3",
     "v-money": "^0.8.1",
