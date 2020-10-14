@@ -15,7 +15,7 @@
             <input
               type="email"
               class="form-control"
-              v-model="form.username"
+              v-model="form.contribuinte"
               placeholder="Digite seu email"
             />
           </div>
@@ -33,7 +33,7 @@
           <button
             type="button"
             @click="submit()"
-            :disabled="form.username == '' || form.password == '' || vcaptcha == false"
+            :disabled="form.contribuinte == '' || form.password == '' || vcaptcha == false"
             class="btn btn-block btn-insumo"
           >Entrar</button>
           <br />
@@ -150,7 +150,7 @@ export default {
     pesquisando: false,
     vcaptcha: true,
     form: {      
-      username: "",
+      contribuinte: "",
       password: "",
     },
   }),

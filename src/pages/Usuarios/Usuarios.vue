@@ -25,15 +25,25 @@
         </div>
 
         <div class="row">
-          <div class="col-lg-6">
+          <div class="col-lg-5">
             <div class="form-group">
               <label class="form-control-label">Contribuinte</label>
               <span class="tx-danger">*</span>
               <the-mask :masked="true" v-model="usuario.cpf" :mask="['###.###.###']" class="form-control" />
             </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="form-group">
+              <label class="form-control-label">Restaurante</label>
+              <span class="tx-danger">*</span>
+              <select v-model="usuario.restaurante" name="restaurante" id class="form-control">
+                <option value="null">Selecione</option>
+                <option v-for="(item,index) in restaurantes" :key="index" :value="item.id">{{item.nome}}</option>
+              </select>
+            </div>
             <!-- form-group -->
           </div>
-          <div class="col-lg-6">
+          <div class="col-lg-3">
             <div class="form-group">
               <label class="form-control-label">Telefone</label>
               <span class="tx-danger">*</span>
@@ -66,7 +76,7 @@
               <label class="form-control-label">Perfil de acesso</label>
               <span class="tx-danger">*</span>
               <select v-model="usuario.role" name="perfil-usuario" id class="form-control">
-                <option value>Selecione</option>
+                <option value="null">Selecione</option>
                 <option v-for="(item,index) in perfis" :key="index" :value="item.id">{{item.name}}</option>
               </select>
             </div>
@@ -98,19 +108,21 @@
 
   function initialState() {
     return {
+      usuarios: [],
+      perfis: [],
+      restaurantes: [],
+      opcao: "A",
       pesquisando: false,
       usuario: {
         username: "",
         cpf: "",
+        restaurante:"",
         telefone: "",
         role: "",
         email: "",
         password: "",
         password_confirmation: "",
-      },
-      opcao: "A",
-      usuarios: [],
-      perfis: [],
+      },            
       colunas: [
         {
           label: "Contribuinte",
@@ -146,8 +158,7 @@
       return initialState();
     },
     mounted() {
-      let usuario = this.$store.state.auth.user;
-      this.perfis = this.$store.state.auth.roles;
+      let usuario = this.$store.state.auth.user;      
       this.load();
     },
 
@@ -237,7 +248,7 @@
                     .fire({
                       icon: "success",
                       title: `Sucesso`,
-                      text: "Taxas atualizadas com sucesso",
+                      text: "Usuário atualizado com sucesso",
                     })
                     .then(() => {
                       this.$nextTick(() => {
@@ -253,13 +264,17 @@
       },
       load() {
         this.pesquisando = true;
-        this.$store.dispatch('usuario/ActionGetList').then(r => {
-          this.pesquisando = false
-          this.usuarios = r
-        }).catch(err => {
-          this.pesquisando = false
-        })
-
+        this.perfis = this.$store.state.auth.roles;
+        const usuarios = this.$store.dispatch('usuario/ActionGetList')
+        const restaurantes = this.$store.dispatch("restaurante/ActionGetList")
+         Promise.all([usuarios,restaurantes]).then(result => {
+           this.usuarios = result[0]
+           this.restaurantes = result[1]
+           this.pesquisando = false;
+         }).catch(err => {
+           console.log(err)
+           this.pesquisando = false
+         })
       },
       Editar(item) {
         this.opcao = "E"
@@ -267,6 +282,7 @@
         this.usuario.password = ''
         this.usuario.role = item.roles[0].id
         this.usuario.id = item.id
+        this.usuario.restaurante = item.restaurante_id
 
       },
       Deletar(item) {

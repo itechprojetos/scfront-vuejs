@@ -11,7 +11,7 @@
       <span class="sidebar-nav-link">Tarefas Semanais</span>
     </li>
     <li class="sidebar-nav-item">
-      <span class="sidebar-nav-link">Restaurantes</span>
+      <router-link to="/restaurantes" class="sidebar-nav-link">Restaurantes</router-link>
     </li>
     <label class="sidebar-label" 
       style="margin-top: 20px; font-size:medium;">CONFIGURAÇÕES</label>
