@@ -17,10 +17,7 @@
       style="margin-top: 20px; font-size:medium;">CONFIGURAÇÕES</label>
     <li class="sidebar-nav-item">
       <router-link to="/usuarios" class="sidebar-nav-link">Usuários</router-link>
-    </li>
-    <li class="sidebar-nav-item">
-      <router-link to="/perfil" class="sidebar-nav-link">Perfil de Acesso</router-link>
-    </li>    
+    </li>   
     <li class="sidebar-nav-item">
       <a class="sidebar-nav-link" style="font-weight: bold;" href="" @click='sair'>Sair</a>
     </li>  
