@@ -4,7 +4,7 @@
     <div class="section-wrapper">
       <div v-if="pesquisando == true" class="loader loader-default is-active" data-text="Carregando"></div>
       <div v-if="empty">
-        <span>Nenhuma atividade diária registrada</span>
+        <span>Nenhuma atividade semanal registrada</span>
       </div>
       <!-- Segunda-Feira -->
       <fieldset style="
