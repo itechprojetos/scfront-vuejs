@@ -1,54 +1,53 @@
 <template>
   <div class="container">
-    <sub-header :titulo="'CADASTRO - RESTAURANTES'" :page="'Restaurantes'" />
+    <sub-header :titulo="'CADASTRO - SETORES'" :page="'Cadastro Setor'" />
+
     <div class="section-wrapper">
       <div v-if="pesquisando == true" class="loader loader-default is-active" data-text="Carregando"></div>
-      <div>
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="form-group">
-              <label class="form-control-label">Nome do Restaurante</label>
-              <span class="tx-danger">*</span>
-              <input id="restaurante" v-model="restaurante.nome" class="form-control" name="restaurante" type="text" />
-            </div>
-          </div>
-          <div class="col-lg-6">
-            <button @click="Salvar()" class="btn btn-insumo pull-right col-lg-4"
-              style="margin-top: 25px; margin-bottom: 50px;">{{opcao == 'A'? 'ADICIONAR': 'SALVAR'}}</button>
-          </div>
-        </div>
-      </div>
       <div class="row">
-        <div class="col-lg-12">
-          <Listagem :dados="listarRestaurantes" :colunas="colunas" @onEditar="Editar" @onDelete="Deletar"
-            :canEditar="podeEditar()" :canInativar="podeApagar()" />
+        <div class="col-lg-6">
+          <div class="form-group">
+            <label class="form-control-label">Nome do Setor</label>
+            <span class="tx-danger">*</span>
+            <input id="setor" v-model="setor.nome" class="form-control" name="setor" type="text" />
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <button @click="Salvar()" class="btn btn-insumo pull-right col-lg-4"
+            style="margin-top: 25px; margin-bottom: 50px;">{{opcao == 'A'? 'ADICIONAR': 'SALVAR'}}</button>
         </div>
       </div>
+      <Listagem :dados="listagemSetores" :colunas="colunas" @onEditar="Editar" @onDelete="Deletar"
+      :canEditar="podeEditar()" :canInativar="podeApagar()" />
     </div>
+
+
   </div>
 </template>
 
 <script>
   import SubHeader from "../../components/layout/SubHeader";
-  import Listagem from "../../components/forms/Listagem.vue";
-
+  import Listagem from "../../components/forms/Listagem";
   function initialState() {
     return {
       opcao: 'A',
-      pesquisando: false,
-      restaurantes: [],
-      restaurante: {
-        nome: ''
+      setores: [],
+      setor:{
+        nome:'',
+        id: null
       },
-      colunas: [
-        {
-          label: "NOME",
-          field: "nome",
-        },
-        {
-          label: "AÇÃO",
-          thClass: "text-center",
-        },
+      pesquisando: false,
+      colunas:[
+      {
+        label: "SETOR",
+        field: "nome",
+        thClass: "text-center",
+        tdClass: "d-flex justify-content-sm-center text-left"
+      },
+      {
+        label: "AÇÃO",
+        thClass: "text-center",
+      },
       ]
     }
   }
@@ -60,34 +59,27 @@
     data: () => {
       return initialState();
     },
-    mounted() {
+    mounted(){
       this.load()
     },
-    computed: {
-      listarRestaurantes() {
-        return this.restaurantes;
-      },
+    computed:{
+      listagemSetores(){
+        return this.setores
+      }
     },
-    methods: {
-      podeEditar() {
-      },
-      podeApagar() {
-      },
-      load() {
+    methods:{
+      load(){
         this.pesquisando = true
-        this.$store.dispatch("restaurante/ActionGetList").then(r => {
-          this.restaurantes = r
-          console.log(r)
+        this.$store.dispatch('setor/ActionGetList').then(r =>{
           this.pesquisando = false
-        }).catch(err => {
-          this.pesquisando = false
+          this.setores = r
         })
       },
       verificarDados() {
         if (
-          this.restaurante.nome === '' ||
-          this.restaurante.nome === null ||
-          this.restaurante.nome === undefined          
+          this.setor.nome === '' ||
+          this.setor.nome === null ||
+          this.setor.nome === undefined          
           ){
             this.$swal
             .fire({
@@ -99,21 +91,22 @@
           }
           return false
       },
-      Salvar() {
+      Salvar(){
+        
         if (this.opcao === "A"){
           if (this.verificarDados()) {
             return
           }
 
           this.pesquisando = true
-          this.$store.dispatch("restaurante/ActionCreate",this.restaurante)
+          this.$store.dispatch("setor/ActionCreate",this.setor)
           .then( r => {
             this.pesquisando = false
             this.$swal
               .fire({
                 icon: "success",
                 title: `Sucesso`,
-                text: "Restaurante adicionado com sucesso",
+                text: "Setor adicionado com sucesso",
               }).then(() => {
                 this.$nextTick(() => {
                   this.$scrollTop()
@@ -127,7 +120,7 @@
             .fire({
               icon: "warning",
               title: "Atenção",
-              text: "Deseja realmente atualizar o restaurante?",
+              text: "Deseja realmente atualizar o setor?",
               showCloseButton: true,
               showCancelButton: true,
               showConfirmButton: true,
@@ -137,13 +130,13 @@
             .then((r) => {
               if (r.value) {
                 this.pesquisando = true
-                this.$store.dispatch('restaurante/ActionUpdate', this.restaurante).then(() => {
+                this.$store.dispatch('setor/ActionUpdate', this.setor).then(() => {
                   this.pesquisando = false
                   this.$swal
                     .fire({
                       icon: "success",
                       title: `Sucesso`,
-                      text: "Restaurante atualizado com sucesso",
+                      text: "Setor atualizado com sucesso",
                     })
                     .then(() => {
                       this.$nextTick(() => {
@@ -159,8 +152,11 @@
       },
       Editar(item) {
         this.opcao = "E"
-        this.restaurante.nome = item.nome
-        this.restaurante.id = item.id
+        this.setor.nome = item.nome
+        this.setor.id = item.id
+        this.$nextTick(() => {
+          this.$scrollTop()
+        });
       },
       Deletar(item) {
         this.$swal
@@ -177,7 +173,7 @@
           .then((r) => {
             if (r.value) {
               this.$store
-                .dispatch("restaurante/ActionDelete", { id: item.id })
+                .dispatch("setor/ActionDelete", { id: item.id })
                 .then(() => {
                   this.$swal
                     .fire({
@@ -188,11 +184,16 @@
                     .then(() => {
                       Object.assign(this.$data, initialState());
                       this.load();
+                      this.$nextTick(() => {
+                        this.$scrollTop()
+                      });
                     });
                 });
             }
           });
-      }
+      },
+      podeEditar(){},
+      podeApagar(){}      
     }
   }
 </script>

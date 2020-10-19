@@ -5,9 +5,8 @@
         <li class="breadcrumb-item">
           <a href="#">Home</a>
         </li>
-        <li class="breadcrumb-item active" aria-current="page">Dashboard</li>
       </ol>
-      <h6 class="slim-pagetitle">DASHBOARD</h6>
+      <h6 class="slim-pagetitle">HOME</h6>
     </div>
     <!-- slim-pageheader -->
 

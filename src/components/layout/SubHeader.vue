@@ -2,7 +2,7 @@
   <div class="slim-pageheader">
     <ol class="breadcrumb slim-breadcrumb">
       <li class="breadcrumb-item">
-        <router-link to="/">APCred</router-link>
+        <router-link to="/">StringCleasing</router-link>
       </li>
       <li class="breadcrumb-item active" aria-current="page">{{page}}</li>
     </ol>

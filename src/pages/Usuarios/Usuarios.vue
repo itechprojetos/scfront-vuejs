@@ -1,6 +1,6 @@
 <template>
   <div class="container">
-    <sub-header :titulo="'CONFIGURAÇÕES - USUÁRIOS'" :page="'Usuários'" />
+    <sub-header :titulo="'CADASTRO - USUÁRIOS'" :page="'Usuários'" />
 
     <div class="section-wrapper">
       <div v-if="pesquisando == true" class="loader loader-default is-active" data-text="Carregando"></div>
