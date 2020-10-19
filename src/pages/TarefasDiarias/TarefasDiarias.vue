@@ -3,7 +3,9 @@
     <sub-header :titulo="'TAREFAS DIÁRIAS'" :page="'Tarefas diárias'" />
     <div class="section-wrapper">
       <div v-if="pesquisando == true" class="loader loader-default is-active" data-text="Carregando"></div>
-
+      <div v-if="atividades.length <= 0">
+        <span>Nenhuma atividade diária registrada</span>
+      </div>
       <div class="mt-2" v-for="(setor,index) in atividades" :key="index">
         <!-- <div class="row"> -->
         <div class="col-12">

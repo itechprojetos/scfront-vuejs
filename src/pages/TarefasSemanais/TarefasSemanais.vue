@@ -3,7 +3,9 @@
     <sub-header :titulo="'TAREFAS SEMANAIS'" :page="'Tarefas semanais'" />
     <div class="section-wrapper">
       <div v-if="pesquisando == true" class="loader loader-default is-active" data-text="Carregando"></div>
-
+      <div v-if="empty">
+        <span>Nenhuma atividade diária registrada</span>
+      </div>
       <!-- Segunda-Feira -->
       <fieldset style="
               display: block;
@@ -375,6 +377,7 @@
   function initialState() {
     return {
       pesquisando: false,
+      empty: true,
       atividades: [],
     }
   }
@@ -392,6 +395,7 @@
     computed: {
       hasSegunda() {
         if (this.atividades.segunda && this.atividades.segunda.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -399,6 +403,7 @@
       },
       hasTerca() {
         if (this.atividades.terca && this.atividades.terca.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -406,6 +411,7 @@
       },
       hasQuarta() {
         if (this.atividades.quarta && this.atividades.quarta.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -413,6 +419,7 @@
       },
       hasQuinta() {
         if (this.atividades.quinta && this.atividades.quinta.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -420,6 +427,7 @@
       },
       hasSexta() {
         if (this.atividades.sexta && this.atividades.sexta.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -427,6 +435,7 @@
       },
       hasSabado() {
         if (this.atividades.sabado && this.atividades.sabado.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
@@ -434,6 +443,7 @@
       },
       hasDomingo() {
         if (this.atividades.domingo && this.atividades.domingo.length > 0) {
+          this.empty = false
           return true
         } else {
           return false
