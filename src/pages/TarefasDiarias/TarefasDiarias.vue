@@ -62,7 +62,7 @@
           this.pesquisando = false
           this.atividades = r
           console.log(r)
-        })
+        }).catch(err => console.log(err))
       },
       done(atividade) {
         this.$swal
