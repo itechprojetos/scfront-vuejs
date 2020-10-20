@@ -495,7 +495,15 @@
                       text: "Fora do horário de registro de atividades!",
                       showCloseButton: true,
                     })
-                } else {
+                } else if ( r =="Registro de atividade no dia errado!") {
+                  this.$swal
+                    .fire({
+                      icon: "error",
+                      title: "Atenção",
+                      text: "A atividade não está no dia de ser registrada!",
+                      showCloseButton: true,
+                    })
+                }else {
                   this.$swal
                     .fire({
                       icon: "success",
@@ -544,6 +552,14 @@
                       icon: "error",
                       title: "Atenção",
                       text: "Fora do horário de registro de atividades!",
+                      showCloseButton: true,
+                    })
+                } else if ( r =="Registro de atividade no dia errado!") {
+                  this.$swal
+                    .fire({
+                      icon: "error",
+                      title: "Atenção",
+                      text: "A atividade não está no dia de ser registrada!",
                       showCloseButton: true,
                     })
                 } else {
