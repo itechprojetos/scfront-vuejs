@@ -10,13 +10,12 @@
         <div class="signin-box">
           <h2 class="signin-title-primary">Bem-Vindo!</h2>
           <h3 class="signin-title-secondary">Acesse para continuar.</h3>
-
           <div class="form-group">
             <input
-              type="email"
+              type="text"
               class="form-control"
               v-model="form.contribuinte"
-              placeholder="Digite seu email"
+              placeholder="Digite seu CPD"
             />
           </div>
           <!-- form-group -->
