@@ -2,8 +2,7 @@
   "name": "stringcleasinfront",
   "description": "A Vue.js project",
   "version": "1.0.0",
-  "author": "Luiz Filipe Alves Coelho de Oliveira",
-  "license": "MIT",
+  "license": "UNLICENSED",
   "private": true,
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack-dev-server --open --hot --port 3000",
