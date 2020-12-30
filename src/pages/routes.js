@@ -7,6 +7,7 @@ import CadastroAtividadeDiaria from "./CadastroAtividadeDiaria/CadastroAtividade
 import CadastroAtividadeSemanal from "./CadastroAtividadeSemanal/CadastroAtividadeSemanal.vue";
 import TarefasDiarias from './TarefasDiarias/TarefasDiarias.vue';
 import TarefaSemanais from './TarefasSemanais/TarefasSemanais.vue';
+import RelatorioPonto from './RelatorioPonto/RelatorioPonto.vue';
 
 export default [
     {
@@ -54,4 +55,9 @@ export default [
         name: 'Tarefas Semanais',
         component: TarefaSemanais
     },
+    {
+        path: '/relatorios/ponto',
+        name: 'Relatório de ponto eletrônico',
+        component: RelatorioPonto
+    }
 ]

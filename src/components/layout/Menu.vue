@@ -1,6 +1,6 @@
 <template>
   <div class="slim-sidebar">
-    <label class="sidebar-label" style="margin-top: 20px; font-size:medium;">MENU</label>
+    <label class="sidebar-label">Menu</label>
     <li class="sidebar-nav-item">
       <router-link to="/" class="sidebar-nav-link">Inicial</router-link>
     </li>
@@ -10,7 +10,7 @@
     <li class="sidebar-nav-item">
       <router-link to="/tarefassemanais" class="sidebar-nav-link">Tarefas Semanais</router-link>
     </li>
-    <label class="sidebar-label" style="margin-top: 20px; font-size:medium;">CADASTROS</label>
+    <label class="sidebar-label">Cadastros</label>
     <li class="sidebar-nav-item">
       <router-link to="/cadastroatividadediaria" class="sidebar-nav-link">Atividades Diárias</router-link>
     </li>
@@ -26,12 +26,14 @@
     <li class="sidebar-nav-item">
       <router-link to="/usuarios" class="sidebar-nav-link">Usuários</router-link>
     </li>
-    <!-- <label class="sidebar-label" style="margin-top: 20px; font-size:medium;">CONFIGURAÇÕES</label> -->
-    <label class="sidebar-label" style="margin-top: 20px; font-size:medium;">AÇÕES</label>
+    <label class="sidebar-label">Relatórios</label>
+    <li class="sidebar-nav-item">
+      <router-link to="/relatorios/ponto" class="sidebar-nav-link">Ponto eletrônico</router-link>
+    </li>
+    <label class="sidebar-label">Ações</label>
     <li class="sidebar-nav-item">
       <a class="sidebar-nav-link" style="font-weight: bold;" href="" @click='sair'>Sair</a>
     </li>
-    </ul>
   </div>
 </template>
 <script>
@@ -50,3 +52,9 @@
     },
   };
 </script>
+<style scoped>
+  .sidebar-label {
+    margin-top: 20px;
+    font-size: medium;
+  }
+</style>
