@@ -83,7 +83,7 @@
       <!-- dropdown -->
       <div class="dropdown dropdown-c">
         <a href="#" class="logged-user" data-toggle="dropdown">
-          <span>Olá {{nome}}</span>
+          <span>Olá, {{nome}}</span>
           <i class="fa fa-angle-down" style="color:#50d88b"></i>
         </a>
         <div class="dropdown-menu dropdown-menu-right">
