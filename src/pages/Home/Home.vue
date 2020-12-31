@@ -92,6 +92,12 @@
                 title: `Error`,
                 text: "Fora do horário de ponto!",
               });
+          } else if (r === 'Você ainda não realizou a saída referente ao seu último ponto de entrada.') {
+            this.$swal.fire({
+              icon: "error",
+              title: `Error`,
+              text: "Você ainda não realizou a saída referente ao seu último ponto de entrada.",
+            });
           }
         }).catch(err => {
           console.log(err)
