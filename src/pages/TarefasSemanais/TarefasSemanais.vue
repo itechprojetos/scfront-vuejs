@@ -19,7 +19,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasSegunda">
+              height: 100%;" v-if="hasSegunda && getWeekDay() === 1">
         <legend style="                
                 display: block;
                 width:auto;
@@ -68,7 +68,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasTerca">
+              height: 100%;" v-if="hasTerca && getWeekDay() === 2">
         <legend style="                
                 display: block;
                 width:auto;
@@ -116,7 +116,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasQuarta">
+              height: 100%;" v-if="hasQuarta && getWeekDay() === 3">
         <legend style="                
                 display: block;
                 width:auto;
@@ -164,7 +164,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasQuinta">
+              height: 100%;" v-if="hasQuinta && getWeekDay() === 4">
         <legend style="                
                 display: block;
                 width:auto;
@@ -212,7 +212,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasSexta">
+              height: 100%;" v-if="hasSexta && getWeekDay() === 5">
         <legend style="                
                 display: block;
                 width:auto;
@@ -260,7 +260,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasSabado">
+              height: 100%;" v-if="hasSabado && getWeekDay() === 6">
         <legend style="                
                 display: block;
                 width:auto;
@@ -308,7 +308,7 @@
               border-width: 2px;
               border-style: groove;
               border-color: threedface;
-              height: 100%;" v-if="hasDomingo">
+              height: 100%;" v-if="hasDomingo && getWeekDay() === 0">
         <legend style="                
                 display: block;
                 width:auto;
@@ -451,6 +451,9 @@
       },
     },
     methods: {
+      getWeekDay() {
+        return (new Date()).getDay();
+      },
       load() {
         this.pesquisando = true
         this.$store.dispatch("tarefassemanais/ActionGetList").then(r => {
