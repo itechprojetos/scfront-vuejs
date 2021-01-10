@@ -1,9 +1,22 @@
+import router from 'vue-router';
 import store from "../store";
+
 export default function (request, next) {
     next(function (response) {
         if (response.status == 403) {
+            if (typeof response.data.message === 'string' && response.data.message.toLowerCase() === 'insufficient permissions') {
+                window._Vue.$swal.fire({
+                    icon: 'warning',
+                    title: 'Permissões insuficientes',
+                    text: 'Desculpe, mas você não tem permissão para executar esta ação',
+                });
+
+                return;
+            }
+
             window._Vue.$router.push("/login");
             store.dispatch("auth/ActionSingnout");
+
             window._Vue.$swal.fire({
                 icon: "warning",
                 title: "Aviso",

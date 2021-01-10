@@ -1,7 +1,7 @@
 <template>
   <div id="app">
     <router-view v-if="isLogin()" />
-    <div v-show="!isLogin()">
+    <div v-if="!isLogin()">
       <div class="slim-header with-sidebar">
         <user />
       </div>
