@@ -108,6 +108,11 @@
           },
           {
             type: 'link',
+            content: 'Ponto eletrônico',
+            href: '/ponto',
+          },
+          {
+            type: 'link',
             content: 'Atividades Diárias',
             href: '/cadastroatividadediaria',
           },

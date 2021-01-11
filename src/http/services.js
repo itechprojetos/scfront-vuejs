@@ -9,6 +9,7 @@ import { services as atividadesemanal } from '../pages/CadastroAtividadeSemanal'
 import { services as tarefassemanais } from '../pages/TarefasSemanais';
 import { services as tarefasdiarias } from '../pages/TarefasDiarias';
 import { services as relatorioponto } from '../pages/RelatorioPonto';
+import { services as pontoeletronico } from '../pages/PontoManual';
 
 export default {
   auth,
@@ -22,4 +23,5 @@ export default {
   tarefassemanais,
   tarefasdiarias,
   relatorioponto,
+  pontoeletronico,
 };

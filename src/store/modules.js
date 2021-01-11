@@ -9,6 +9,7 @@ import { store as atividadesemanal } from '../pages/CadastroAtividadeSemanal';
 import { store as tarefassemanais } from '../pages/TarefasSemanais';
 import { store as tarefasdiarias } from '../pages/TarefasDiarias';
 import { store as relatorioponto } from '../pages/RelatorioPonto';
+import { store as pontoeletronico } from '../pages/PontoManual';
 
 export default {
   auth,
@@ -22,4 +23,5 @@ export default {
   tarefassemanais,
   tarefasdiarias,
   relatorioponto,
+  pontoeletronico,
 };
