@@ -44,7 +44,6 @@
         users: [],
         columns: [
           { label: 'Nome', field: 'username' },
-          { label: 'Documento', field: 'cpf' },
           { label: 'Restaurante', field: 'restaurante.nome' },
           { label: 'Status', field: 'isOnline', thClass: 'text-center', tdClass: 'text-center', html: true },
         ],
