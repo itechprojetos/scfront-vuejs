@@ -15,7 +15,7 @@
               type="text"
               class="form-control"
               v-model="form.contribuinte"
-              placeholder="Digite seu CPD"
+              placeholder="Digite seu contribuinte"
             />
           </div>
           <!-- form-group -->
