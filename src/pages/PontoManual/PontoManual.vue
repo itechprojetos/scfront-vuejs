@@ -25,9 +25,9 @@
         </div>
         <div class="col-md-2">
           <div class="form-group">
-            <label class="form-control-label">Data e hora</label>
+            <label class="form-control-label">Data</label>
             <span class="tx-danger">*</span>
-            <the-mask class="form-control" type="text" v-model="addRecord.datetime" :masked="true" :mask="['##/##/#### ##:##:##']" />
+            <the-mask class="form-control" type="text" v-model="addRecord.datetime" :masked="true" :mask="['##/##/####']" />
           </div>
         </div>
         <div class="col-md-3">
@@ -63,10 +63,10 @@
         users: [],
         columns: [
           { label: 'Nome', field: 'name' },
-          { label: 'Documento', field: 'document', thClass: 'text-center', tdClass: 'text-center' },
           { label: 'Restaurante', field: 'restaurant', thClass: 'text-center', tdClass: 'text-center' },
           { label: 'Entrada', field: 'toClockIn', thClass: 'text-center', tdClass: 'text-center' },
           { label: 'Saída', field: 'toClockOut', thClass: 'text-center', tdClass: 'text-center' },
+          { label: 'Registro manual', field: 'delayed', thClass: 'text-center', tdClass: 'text-center' },
         ],
       };
     },
@@ -89,6 +89,7 @@
             formatedRecords.push(Object.assign(record, {
               toClockIn: this.$moment(record.toClockIn, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm:ss'),
               toClockOut: record.toClockOut ? this.$moment(record.toClockOut, 'YYYY-MM-DD HH:mm:ss').format('DD/MM/YYYY HH:mm:ss') : '--',
+              delayed: record ? 'Sim' : 'Não',
             }));
           }
 
@@ -115,9 +116,9 @@
           return;
         }
 
-        const formatedDatetime = this.$moment(this.addRecord.datetime, 'DD-MM-YYYY HH:mm:ss').format('YYYY-MM-DD HH:mm:ss');
+        const formatedDatetime = this.$moment(this.addRecord.datetime, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
-        if (formatedDatetime.toLowerCase() === 'invalid date' || this.addRecord.datetime.length !== 19) {
+        if (formatedDatetime.toLowerCase() === 'invalid date' || this.addRecord.datetime.length !== 10) {
           this.$swal.fire({
             icon: 'warning',
             title: 'Dados inválidos',
@@ -130,14 +131,23 @@
         this.researching = true;
 
         try {
-          await this.$store.dispatch('pontoeletronico/ActionCreate', Object.assign(JSON.parse(JSON.stringify(this.addRecord)), {
+          const data = await this.$store.dispatch('pontoeletronico/ActionCreate', Object.assign(JSON.parse(JSON.stringify(this.addRecord)), {
             datetime: formatedDatetime,
           }));
-            
-          await this.load();
 
-          this.addRecord = { userId: null, type: null, datetime: null };
-        } catch (err) {}
+          if (!data.success) {
+            this.$swal.fire({
+              icon: 'warning',
+              title: 'Falha ao tentar registrar ponto',
+              text: data.message,
+            });
+          } else {
+            await this.load();
+            this.addRecord = { userId: null, type: null, datetime: null };
+          }
+        } catch (err) {
+          console.error(err);
+        }
 
         this.researching = false;
       },
