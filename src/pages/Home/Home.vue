@@ -60,48 +60,17 @@
         return (zero + num).slice(-digit);
       },
       toClockIn() {
-        let ponto = {
+        this.$store.dispatch('home/ActionToClockIn', {
           user: this.$store.state.auth.user.id
-        }
-        this.$store.dispatch('home/ActionToClockIn', ponto).then(r => {
-          if (r === 'Ponto registrado com sucesso') {
-            this.$swal
-              .fire({
-                icon: "success",
-                title: `Sucesso`,
-                text: "Ponto de entrada registrado com sucesso",
-              });
-          } else if (r === 'Ponto de Entrada já cadastrado') {
-            this.$swal
-              .fire({
-                icon: "error",
-                title: `Error`,
-                text: "Ponto de entrada ja registrado!",
-              });
-          } else if (r === 'Ponto de Saída já cadastrado') {
-            this.$swal
-              .fire({
-                icon: "error",
-                title: `Error`,
-                text: "Ponto de saida ja registrado!",
-              });
-          } else if (r === 'Fora do horário de registro de ponto.') {
-            this.$swal
-              .fire({
-                icon: "error",
-                title: `Error`,
-                text: "Fora do horário de ponto!",
-              });
-          } else if (r === 'Você ainda não realizou a saída referente ao seu último ponto de entrada.') {
-            this.$swal.fire({
-              icon: "error",
-              title: `Error`,
-              text: "Você ainda não realizou a saída referente ao seu último ponto de entrada.",
-            });
-          }
+        }).then(r => {
+          this.$swal.fire({
+            icon: r.success ? 'success' : 'error',
+            title: r.success ? 'Ponto registrado' : 'Falha ao tentar registrar ponto',
+            text: r.message,
+          });
         }).catch(err => {
           console.log(err)
-        })
+        });
       }
     },
   };
