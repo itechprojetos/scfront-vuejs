@@ -1,16 +1,17 @@
 <template>
   <div class="slim-footer">
     <div class="container">
-      <p>Copyright 2020 &copy; Todos os direitos reservados.</p>
       <p>
-        Desenvolvido por:
-        <a href>Itech</a>
+        Copyright 2020 &copy; Todos os direitos reservados.
+      </p>
+      <p>
+        Desenvolvido por
+        <img class="iettto-footer-logo" src="../../../assets/img/iettto-labs.png" alt="Iettto Labs">
       </p>
     </div>
-    <!-- container -->
   </div>
-  <!-- slim-footer -->
 </template>
+
 <script>
 export default {
   name: "Foot",
@@ -21,3 +22,10 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+  .iettto-footer-logo {
+    margin-left: 0.8rem;
+    max-height: 20px;
+  }
+</style>
