@@ -27,7 +27,7 @@
           <div class="form-group">
             <label class="form-control-label">Data</label>
             <span class="tx-danger">*</span>
-            <the-mask class="form-control" type="text" v-model="addRecord.datetime" :masked="true" :mask="['##/##/####']" />
+            <datepicker input-class="form-control" format="dd/MM/yyyy" :language="pt" v-model="addRecord.datetime"></datepicker>
           </div>
         </div>
         <div class="col-md-3">
@@ -45,6 +45,8 @@
 
 <script>
   import { TheMask } from 'vue-the-mask';
+  import Datepicker from 'vuejs-datepicker';
+  import { ptBR } from 'vuejs-datepicker/dist/locale';
   import SubHeader from '../../components/layout/SubHeader';
   import Listagem from '../../components/forms/Listagem';
 
@@ -53,10 +55,12 @@
       SubHeader,
       Listagem,
       TheMask,
+      Datepicker,
     },
 
     data() {
       return {
+        pt: ptBR,
         addRecord: { userId: null, type: null, datetime: null },
         researching: false,
         records: [],
@@ -118,7 +122,7 @@
 
         const formatedDatetime = this.$moment(this.addRecord.datetime, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
-        if (formatedDatetime.toLowerCase() === 'invalid date' || this.addRecord.datetime.length !== 10) {
+        if (formatedDatetime.toLowerCase() === 'invalid date' || formatedDatetime.length !== 10) {
           this.$swal.fire({
             icon: 'warning',
             title: 'Dados inválidos',
