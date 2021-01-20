@@ -27,7 +27,14 @@
           <div class="form-group">
             <label class="form-control-label">Data</label>
             <span class="tx-danger">*</span>
-            <datepicker input-class="form-control" format="dd/MM/yyyy" :language="pt" v-model="addRecord.datetime"></datepicker>
+            <datepicker input-class="form-control" format="dd/MM/yyyy" :language="pt" v-model="addRecord.date"></datepicker>
+          </div>
+        </div>
+        <div class="col-md-2">
+          <div class="form-group">
+            <label class="form-control-label">Hora</label>
+            <span class="tx-danger">*</span>
+            <the-mask class="form-control" :mask="'##:##:##'" v-model="addRecord.time" />
           </div>
         </div>
         <div class="col-md-3">
@@ -61,7 +68,7 @@
     data() {
       return {
         pt: ptBR,
-        addRecord: { userId: null, type: null, datetime: null },
+        addRecord: { userId: null, type: null, date: null, time: null },
         researching: false,
         records: [],
         users: [],
@@ -70,7 +77,7 @@
           { label: 'Restaurante', field: 'restaurant', thClass: 'text-center', tdClass: 'text-center' },
           { label: 'Entrada', field: 'toClockIn', thClass: 'text-center', tdClass: 'text-center' },
           { label: 'Saída', field: 'toClockOut', thClass: 'text-center', tdClass: 'text-center' },
-          { label: 'Registro manual', field: 'delayed', thClass: 'text-center', tdClass: 'text-center' },
+          { label: 'Ponto manual', field: 'delayed', thClass: 'text-center', tdClass: 'text-center' },
         ],
       };
     },
@@ -110,7 +117,7 @@
       },
 
       async create() {
-        if (!this.addRecord.userId || !this.addRecord.type || !this.addRecord.datetime) {
+        if (!this.addRecord.userId || !this.addRecord.type || !this.addRecord.date || !this.addRecord.time) {
           this.$swal.fire({
             icon: 'warning',
             title: 'Alguns dados estão faltando',
@@ -120,9 +127,9 @@
           return;
         }
 
-        const formatedDatetime = this.$moment(this.addRecord.datetime, 'DD-MM-YYYY').format('YYYY-MM-DD');
+        const formatedDate = this.$moment(this.addRecord.date, 'DD-MM-YYYY').format('YYYY-MM-DD');
 
-        if (formatedDatetime.toLowerCase() === 'invalid date' || formatedDatetime.length !== 10) {
+        if (formatedDate.toLowerCase() === 'invalid date' || formatedDate.length !== 10) {
           this.$swal.fire({
             icon: 'warning',
             title: 'Dados inválidos',
@@ -132,11 +139,24 @@
           return;
         }
 
+        const formatedTime = this.$moment(this.addRecord.time, 'HH:mm:ss').format('HH:mm:ss');
+
+        if (formatedTime.toLowerCase() === 'invalid date' || formatedTime.length !== 8) {
+          this.$swal.fire({
+            icon: 'warning',
+            title: 'Dados inválidos',
+            text: 'A hora que você forneceu não é válida',
+          });
+
+          return;
+        }
+
         this.researching = true;
 
         try {
           const data = await this.$store.dispatch('pontoeletronico/ActionCreate', Object.assign(JSON.parse(JSON.stringify(this.addRecord)), {
-            datetime: formatedDatetime,
+            date: formatedDate,
+            time: formatedTime,
           }));
 
           if (!data.success) {
@@ -147,7 +167,7 @@
             });
           } else {
             await this.load();
-            this.addRecord = { userId: null, type: null, datetime: null };
+            this.addRecord = { userId: null, type: null, date: null, time: null };
           }
         } catch (err) {
           console.error(err);
