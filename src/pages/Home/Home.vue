@@ -51,9 +51,9 @@
     },
     methods: {
       async updateTime() {
-        this.serverHour = this.serverHour.add(1, 'second');
-        this.time = this.serverHour.format('HH:mm:ss');
-        this.date = `${this.serverHour.format('DD/MM/YYYY')} ${this.weekDays[this.serverHour.day()]}`;
+        this.serverTime = this.serverTime.add(1, 'second');
+        this.time = this.serverTime.format('HH:mm:ss');
+        this.date = `${this.serverTime.format('DD/MM/YYYY')} ${this.weekDays[this.serverTime.day()]}`;
       },
       zeroPadding(num, digit) {
         var zero = '';

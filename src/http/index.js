@@ -7,7 +7,7 @@ Vue.use(VueResource);
 
 const http = Vue.http;
 //http.options.root = "http://api.stringcleasing.pt/api";
-http.options.root = "http://127.0.0.1:8080/api";
+http.options.root = "https://api.string.iettto.com/api";
 http.interceptors.push(interceptors);
 
 Object.keys(services).map(function (s) {
