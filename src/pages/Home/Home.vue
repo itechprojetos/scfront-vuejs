@@ -46,9 +46,10 @@
       clearInterval(this.timerID);
     },
     methods: {
-      updateTime() {
+      async updateTime() {
         var week = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
-        var cd = new Date();
+        const currentHour = await this.$store.dispatch('home/ActionGetCurrentHour');
+        var cd = new Date(currentHour.iso);
         this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
         this.date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
       },
