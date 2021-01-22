@@ -34,11 +34,15 @@
 <script>
   export default {
     data: () => ({
+      weekDays: ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'],
       date: undefined,
+      serverTime: undefined,
       time: undefined,
       timerID: undefined,
     }),
-    mounted() {
+    async mounted() {
+      const { iso: serverHour } = await this.$store.dispatch('home/ActionGetCurrentHour');
+      this.serverTime = this.$moment(serverHour).utcOffset(serverHour);
       this.timerID = setInterval(this.updateTime, 1000);
       this.updateTime();
     },
@@ -47,11 +51,9 @@
     },
     methods: {
       async updateTime() {
-        var week = ['DOM', 'SEG', 'TER', 'QUA', 'QUI', 'SEX', 'SÁB'];
-        const currentHour = await this.$store.dispatch('home/ActionGetCurrentHour');
-        var cd = new Date(currentHour.iso);
-        this.time = this.zeroPadding(cd.getHours(), 2) + ':' + this.zeroPadding(cd.getMinutes(), 2) + ':' + this.zeroPadding(cd.getSeconds(), 2);
-        this.date = this.zeroPadding(cd.getFullYear(), 4) + '-' + this.zeroPadding(cd.getMonth() + 1, 2) + '-' + this.zeroPadding(cd.getDate(), 2) + ' ' + week[cd.getDay()];
+        this.serverHour = this.serverHour.add(1, 'second');
+        this.time = this.serverHour.format('HH:mm:ss');
+        this.date = `${this.serverHour.format('DD/MM/YYYY')} ${this.weekDays[this.serverHour.day()]}`;
       },
       zeroPadding(num, digit) {
         var zero = '';
